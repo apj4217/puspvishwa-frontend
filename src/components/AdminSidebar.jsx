@@ -1,7 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import BrandLogo from "./BrandLogo";
 
 function AdminSidebar() {
+  const navigate = useNavigate();
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/admin-login", { replace: true });
+  };
+
   return (
     <aside
       className="bg-dark text-white p-4 pv-admin-sidebar"
@@ -32,6 +40,15 @@ function AdminSidebar() {
           <i className="bi bi-envelope-paper me-2"></i>
           Contact Requests
         </Link>
+
+        <button
+          type="button"
+          className="text-white text-start border-0 bg-transparent p-0"
+          onClick={logout}
+        >
+          <i className="bi bi-box-arrow-right me-2"></i>
+          Logout
+        </button>
       </nav>
     </aside>
   );
