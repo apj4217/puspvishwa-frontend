@@ -28,6 +28,7 @@ function Navbar() {
     event.preventDefault();
 
     const query = searchValue.trim();
+    closeMobileMenu();
 
     if (!query) {
       navigate("/shop");
@@ -37,10 +38,24 @@ function Navbar() {
     navigate(`/shop?search=${encodeURIComponent(query)}`);
   };
 
+  const closeMobileMenu = () => {
+    const menu = document.getElementById("mainNavbar");
+
+    if (menu?.classList.contains("show")) {
+      menu.classList.remove("show");
+    }
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     setIsLoggedIn(false);
+    closeMobileMenu();
     navigate("/");
   };
 
@@ -93,6 +108,7 @@ function Navbar() {
               <Link
                 to="/"
                 className="nav-link text-white fw-semibold"
+                onClick={closeMobileMenu}
                 style={{
                   fontSize: "0.95rem",
                 }}
@@ -107,6 +123,7 @@ function Navbar() {
               <Link
                 to="/shop"
                 className="nav-link text-white fw-semibold"
+                onClick={closeMobileMenu}
                 style={{
                   fontSize: "0.95rem",
                 }}
@@ -121,6 +138,7 @@ function Navbar() {
               <Link
                 to="/services"
                 className="nav-link text-white fw-semibold"
+                onClick={closeMobileMenu}
                 style={{
                   fontSize: "0.95rem",
                 }}
@@ -135,6 +153,7 @@ function Navbar() {
               <Link
                 to="/about"
                 className="nav-link text-white fw-semibold"
+                onClick={closeMobileMenu}
                 style={{
                   fontSize: "0.95rem",
                 }}
@@ -149,6 +168,7 @@ function Navbar() {
               <Link
                 to="/contact"
                 className="nav-link text-white fw-semibold"
+                onClick={closeMobileMenu}
                 style={{
                   fontSize: "0.95rem",
                 }}
@@ -187,6 +207,7 @@ function Navbar() {
             <Link
               to="/cart"
               className="text-decoration-none d-flex align-items-center justify-content-center"
+              onClick={closeMobileMenu}
               style={{
                 width: "40px",
                 height: "40px",
@@ -232,6 +253,7 @@ function Navbar() {
               <Link
                 to="/login"
                 className="text-decoration-none d-flex align-items-center justify-content-center"
+                onClick={closeMobileMenu}
                 title="Login"
                 aria-label="Login"
                 style={{

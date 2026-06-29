@@ -28,6 +28,7 @@ function About() {
           src="https://images.pexels.com/photos/931162/pexels-photo-931162.jpeg?auto=compress&cs=tinysrgb&w=2000"
           alt="Flowers"
           className="position-absolute top-0 start-0 w-100 h-100"
+          fetchPriority="high"
           style={{
             objectFit: "cover",
             filter: "brightness(28%)",
@@ -130,6 +131,8 @@ function About() {
                   src="https://images.pexels.com/photos/35130817/pexels-photo-35130817.jpeg"
                   alt="Wedding"
                   className="img-fluid w-100"
+                  loading="lazy"
+                  decoding="async"
                   style={{
                     height: "750px",
                     objectFit: "cover",

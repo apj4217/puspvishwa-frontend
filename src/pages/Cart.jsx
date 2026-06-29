@@ -181,7 +181,7 @@ function Cart() {
                 {cartItems.map((item) => (
                   <article key={item.id} className="pv-cart-item">
                     <div className="pv-cart-image">
-                      <img src={item.image} alt={item.name} />
+                      <img src={item.image} alt={item.name} loading="lazy" decoding="async" />
                     </div>
 
                     <div className="pv-cart-content">

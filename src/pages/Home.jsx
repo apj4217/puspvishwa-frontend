@@ -27,6 +27,7 @@ function Home() {
           src="https://images.pexels.com/photos/931162/pexels-photo-931162.jpeg?auto=compress&cs=tinysrgb&w=2000"
           alt="Flowers"
           className="position-absolute top-0 start-0 w-100 h-100"
+          fetchPriority="high"
           style={{
             objectFit: "cover",
             filter: "brightness(28%)",
@@ -139,6 +140,8 @@ function Home() {
                   src="https://images.pexels.com/photos/33852468/pexels-photo-33852468.jpeg"
                   alt="Luxury Event"
                   className="img-fluid"
+                  loading="lazy"
+                  decoding="async"
                   style={{
                     borderRadius: "30px",
                     height: "260px",
@@ -317,6 +320,8 @@ function Home() {
                   src="https://images.pexels.com/photos/18530977/pexels-photo-18530977.jpeg"
                   alt="Wedding"
                   className="w-100 h-100"
+                  loading="lazy"
+                  decoding="async"
                   style={{
                     objectFit: "cover",
                   }}
@@ -414,6 +419,8 @@ function Home() {
                     src="https://images.pexels.com/photos/931177/pexels-photo-931177.jpeg?auto=compress&cs=tinysrgb&w=1600"
                     alt="Bouquet"
                     className="w-100 h-100"
+                    loading="lazy"
+                    decoding="async"
                     style={{
                       objectFit: "cover",
                     }}
@@ -541,6 +548,8 @@ function Home() {
           src="https://images.pexels.com/photos/169198/pexels-photo-169198.jpeg?auto=compress&cs=tinysrgb&w=2000"
           alt="Luxury"
           className="position-absolute top-0 start-0 w-100 h-100"
+          loading="lazy"
+          decoding="async"
           style={{
             objectFit: "cover",
             filter: "brightness(30%)",
