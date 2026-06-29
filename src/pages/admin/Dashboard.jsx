@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import API from "../../api";
-import AdminSidebar from "../../components/AdminSidebar";
+import AdminSidebar from "../../components/Adminsidebar";
 
 function Dashboard() {
   const [users, setUsers] = useState([]);
