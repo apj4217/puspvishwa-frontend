@@ -10,6 +10,7 @@ import Registerpage from "../pages/Registerpage";
 import Services from "../pages/Services";
 import Shop from "../pages/Shop";
 import TermsConditions from "../pages/TermsConditions";
+import AdminLogin from "../pages/admin/AdminLogin";
 import Contacts from "../pages/admin/Contacts";
 import Dashboard from "../pages/admin/Dashboard";
 import Orders from "../pages/admin/Orders";
@@ -27,6 +28,7 @@ function AppRoutes() {
       <Route path="/terms-conditions" element={<TermsConditions />} />
       <Route path="/login" element={<Loginpage />} />
       <Route path="/register" element={<Registerpage />} />
+      <Route path="/admin-login" element={<AdminLogin />} />
 
       <Route element={<ProtectedRoute />}>
         <Route path="/cart" element={<Cart />} />

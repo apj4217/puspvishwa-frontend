@@ -16,7 +16,7 @@ function ProtectedRoute({ requiredRole }) {
   if (!token) {
     return (
       <Navigate
-        to="/login"
+        to={requiredRole === "admin" ? "/admin-login" : "/login"}
         state={{ from: location.pathname }}
         replace
       />
@@ -26,7 +26,11 @@ function ProtectedRoute({ requiredRole }) {
   if (requiredRole && user?.role !== requiredRole) {
     return (
       <Navigate
-        to="/login"
+        to="/admin-login"
+        state={{
+          from: location.pathname,
+          reason: "Please login with an administrator account.",
+        }}
         replace
       />
     );

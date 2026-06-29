@@ -13,6 +13,7 @@ function App() {
 
   const hideLayout =
     location.pathname.startsWith("/admin") ||
+    location.pathname === "/admin-login" ||
     location.pathname === "/login" ||
     location.pathname === "/register";
 
