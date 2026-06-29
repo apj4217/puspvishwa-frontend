@@ -109,7 +109,7 @@ function Contact() {
               <span
                 className="badge bg-light text-dark px-4 py-2 rounded-pill mb-4"
               >
-                CONTACT EVARA FLORALS
+                CONTACT APJ'S FLORALS
               </span>
 
               <h1
@@ -136,7 +136,7 @@ function Contact() {
                   opacity: "0.9",
                 }}
               >
-                Get in touch with Evara Florals & Events for luxury floral
+                Get in touch with Apj's Florals for luxury floral
                 decorations, elegant wedding styling and premium
                 event experiences crafted beautifully.
               </p>
@@ -538,7 +538,7 @@ function Contact() {
             <span
               className="badge bg-light text-dark px-4 py-2 rounded-pill mb-4"
             >
-              Evara Florals & Events
+              Apj's Florals
             </span>
 
             <h1

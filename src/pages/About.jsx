@@ -87,7 +87,7 @@ function About() {
                   opacity: "0.9",
                 }}
               >
-                Evara Florals & Events blends modern floral aesthetics,
+                Apj's Florals blends modern floral aesthetics,
                 luxury event styling and artistic creativity
                 to create unforgettable celebrations that
                 feel timeless and elegant.
@@ -479,7 +479,7 @@ function About() {
               <span
                 className="badge bg-light text-dark px-4 py-2 rounded-pill mb-4"
               >
-                Evara Florals & Events
+                Apj's Florals
               </span>
 
               <h1

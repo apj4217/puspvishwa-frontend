@@ -244,7 +244,7 @@ function Services() {
           <div className="col-lg-6 p-5">
 
             <h1 className="fw-bold display-5 mb-4">
-              Why Choose Evara Florals & Events?
+              Why Choose Apj's Florals?
             </h1>
 
             <p className="text-muted fs-5">

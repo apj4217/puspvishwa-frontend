@@ -1,11 +1,28 @@
 
-import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import BrandLogo from "./BrandLogo";
 
 function Navbar() {
   const [searchValue, setSearchValue] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(() => {
+    return Boolean(localStorage.getItem("token") && localStorage.getItem("user"));
+  });
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    const checkAuth = () => {
+      setIsLoggedIn(Boolean(localStorage.getItem("token") && localStorage.getItem("user")));
+    };
+
+    checkAuth();
+    window.addEventListener("storage", checkAuth);
+
+    return () => {
+      window.removeEventListener("storage", checkAuth);
+    };
+  }, [location.pathname]);
 
   const submitSearch = (event) => {
     event.preventDefault();
@@ -18,6 +35,13 @@ function Navbar() {
     }
 
     navigate(`/shop?search=${encodeURIComponent(query)}`);
+  };
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    setIsLoggedIn(false);
+    navigate("/");
   };
 
   return (
@@ -181,31 +205,51 @@ function Navbar() {
 
             </Link>
 
-            {/* LOGIN */}
+            {/* LOGIN / LOGOUT */}
 
-            <Link
-              to="/login"
-              className="text-decoration-none d-flex align-items-center justify-content-center"
-              style={{
-                width: "40px",
-                height: "40px",
-                borderRadius: "50%",
-                background:
-                  "linear-gradient(135deg,#ffffff,#dddddd)",
-              }}
-            >
-
-              <img
-                src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png"
-                alt="login"
+            {isLoggedIn ? (
+              <button
+                type="button"
+                onClick={logout}
+                className="border-0 text-decoration-none d-flex align-items-center justify-content-center"
+                title="Logout"
+                aria-label="Logout"
                 style={{
-                  width: "17px",
-                  height: "17px",
-                  objectFit: "contain",
+                  width: "40px",
+                  height: "40px",
+                  borderRadius: "50%",
+                  background: "linear-gradient(135deg,#ffffff,#dddddd)",
                 }}
-              />
-
-            </Link>
+              >
+                <i
+                  className="bi bi-box-arrow-right text-dark"
+                  style={{
+                    fontSize: "1.1rem",
+                  }}
+                ></i>
+              </button>
+            ) : (
+              <Link
+                to="/login"
+                className="text-decoration-none d-flex align-items-center justify-content-center"
+                title="Login"
+                aria-label="Login"
+                style={{
+                  width: "40px",
+                  height: "40px",
+                  borderRadius: "50%",
+                  background:
+                    "linear-gradient(135deg,#ffffff,#dddddd)",
+                }}
+              >
+                <i
+                  className="bi bi-person text-dark"
+                  style={{
+                    fontSize: "1.1rem",
+                  }}
+                ></i>
+              </Link>
+            )}
 
           </div>
 

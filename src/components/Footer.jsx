@@ -18,18 +18,18 @@ function Footer() {
     }
 
     const savedEmails = JSON.parse(
-      localStorage.getItem("evara_subscribers") || "[]"
+      localStorage.getItem("apjs_florals_subscribers") || "[]"
     );
 
     if (!savedEmails.includes(trimmedEmail)) {
       localStorage.setItem(
-        "evara_subscribers",
+        "apjs_florals_subscribers",
         JSON.stringify([...savedEmails, trimmedEmail])
       );
     }
 
     setEmail("");
-    setMessage("Thank you for joining Evara updates.");
+    setMessage("Thank you for joining Apj's Florals updates.");
   };
 
   return (
@@ -38,7 +38,7 @@ function Footer() {
         <div className="row align-items-center g-5 pb-5">
           <div className="col-lg-6">
             <span className="badge bg-light text-dark px-4 py-2 rounded-pill mb-4">
-              Evara Florals & Events
+              Apj's Florals
             </span>
 
             <h1
@@ -200,7 +200,7 @@ function Footer() {
 
         <div className="border-top border-secondary text-center py-4 mt-4">
           <p className="m-0 opacity-75">
-            © 2026 Evara Florals & Events - Crafted With Elegance.
+            © 2026 Apj's Florals - Crafted With Elegance.
           </p>
         </div>
       </div>

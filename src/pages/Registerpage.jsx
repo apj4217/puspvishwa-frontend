@@ -162,7 +162,7 @@ function Registerpage() {
               <span
                 className="badge bg-light text-dark px-4 py-2 rounded-pill mb-4"
               >
-                JOIN EVARA FLORALS
+                JOIN APJ'S FLORALS
               </span>
 
               <h1
@@ -191,7 +191,7 @@ function Registerpage() {
                   opacity: "0.85",
                 }}
               >
-                Join Evara Florals & Events and explore
+                Join Apj's Florals and explore
                 premium floral styling,
                 elegant decorations and
                 unforgettable luxury experiences.

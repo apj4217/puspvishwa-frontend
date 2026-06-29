@@ -3,7 +3,7 @@ import { createContext, useEffect, useMemo, useState } from "react";
 // eslint-disable-next-line react-refresh/only-export-components
 export const CardContext = createContext();
 
-const CART_STORAGE_KEY = "evara_cart";
+const CART_STORAGE_KEY = "apjs_florals_cart";
 
 function CartProvider({ children }) {
   const [cartItems, setCartItems] = useState(() => {

@@ -4,7 +4,7 @@ function TermsConditions() {
       <section className="container py-5">
         <div className="pv-policy-shell shadow-lg">
           <span className="badge bg-dark px-4 py-2 mb-4">
-            Evara Florals & Events
+            Apj's Florals
           </span>
 
           <h1 className="fw-bold mb-4">

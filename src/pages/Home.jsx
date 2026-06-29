@@ -81,7 +81,7 @@ function Home() {
                   letterSpacing: "-4px",
                 }}
               >
-                EVARA
+                APJ'S
                 <br />
                 FLORALS
               </h1>
@@ -489,7 +489,7 @@ function Home() {
                   lineHeight: "2",
                 }}
               >
-                Evara Florals & Events specializes in modern floral
+                Apj's Florals specializes in modern floral
                 styling and premium event decoration.
                 Every celebration is transformed into a
                 luxurious experience with artistic floral

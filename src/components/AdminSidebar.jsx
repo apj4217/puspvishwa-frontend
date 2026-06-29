@@ -4,7 +4,7 @@ import BrandLogo from "./BrandLogo";
 function AdminSidebar() {
   return (
     <aside
-      className="bg-dark text-white p-4"
+      className="bg-dark text-white p-4 pv-admin-sidebar"
       style={{
         width: "280px",
         minHeight: "100vh",
@@ -12,7 +12,7 @@ function AdminSidebar() {
     >
       <BrandLogo light className="mb-5" />
 
-      <nav className="d-flex flex-column gap-3">
+      <nav className="d-flex flex-column gap-3 pv-admin-nav">
         <Link to="/admin" className="text-white text-decoration-none">
           <i className="bi bi-speedometer2 me-2"></i>
           Dashboard
