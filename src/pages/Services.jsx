@@ -1,4 +1,6 @@
 
+import { Link } from "react-router-dom";
+
 function Services() {
 
   const services = [
@@ -192,11 +194,12 @@ function Services() {
                       {service.desc}
                     </p>
 
-                    <button
+                    <Link
+                      to={`/contact?service=${encodeURIComponent(service.title)}`}
                       className="btn btn-dark rounded-pill px-5 py-2 mt-3"
                     >
                       Book Service
-                    </button>
+                    </Link>
 
                   </div>
 
@@ -313,11 +316,12 @@ function Services() {
 
             </div>
 
-            <button
+            <Link
+              to="/contact"
               className="btn btn-dark rounded-pill px-5 py-3 mt-5"
             >
               Contact Us
-            </button>
+            </Link>
 
           </div>
 

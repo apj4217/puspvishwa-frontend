@@ -1,9 +1,10 @@
 
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import API from "../api";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function Contact() {
+  const [searchParams] = useSearchParams();
   const businessEmail = "phuspvishwa@gmail.com";
   const businessPhone = "918830764801";
   const whatsappText = encodeURIComponent(
@@ -37,6 +38,18 @@ function Contact() {
     });
 
   };
+
+  useEffect(() => {
+    const selectedService = searchParams.get("service");
+
+    if (selectedService) {
+      setFormData((current) => ({
+        ...current,
+        eventType: selectedService,
+        message: current.message || `I want to book ${selectedService}.`,
+      }));
+    }
+  }, [searchParams]);
 
   const submitHandler =
     async (e) => {
@@ -408,7 +421,7 @@ function Contact() {
 
                 <form onSubmit={submitHandler}>
                   {formStatus && (
-                    <div className={`pv-form-message ${formStatus.type} mb-4`}>
+                    <div className={`pv-form-message ${formStatus.type} mb-4`} role="status">
                       <i
                         className={`bi ${
                           formStatus.type === "success"
@@ -419,6 +432,9 @@ function Contact() {
                       <div>
                         <strong>{formStatus.title}</strong>
                         <span>{formStatus.text}</span>
+                        {formStatus.type === "success" && (
+                          <small>We have saved your enquiry successfully.</small>
+                        )}
                       </div>
                     </div>
                   )}
@@ -522,7 +538,23 @@ function Contact() {
                       </option>
 
                       <option>
+                        Mandap Decoration
+                      </option>
+
+                      <option>
                         Birthday Decoration
+                      </option>
+
+                      <option>
+                        Car Decoration
+                      </option>
+
+                      <option>
+                        Reception Decoration
+                      </option>
+
+                      <option>
+                        Haldi Decoration
                       </option>
 
                       <option>

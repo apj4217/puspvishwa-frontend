@@ -63,6 +63,7 @@ function ProductCard({ product }) {
               <div>
                 <strong>Added To Cart</strong>
                 <span>{product.name} is ready for checkout.</span>
+                <small>Success</small>
               </div>
             </div>
           )}

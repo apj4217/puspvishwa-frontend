@@ -260,7 +260,7 @@ function Cart() {
         </div>
 
         {notice && (
-          <div className={`pv-form-message ${notice.type} mb-4`}>
+          <div className={`pv-form-message ${notice.type} mb-4`} role="status">
             <i
               className={`bi ${
                 notice.type === "success"
@@ -271,6 +271,9 @@ function Cart() {
             <div>
               <strong>{notice.title}</strong>
               <span>{notice.text}</span>
+              {notice.type === "success" && (
+                <small>Your cart has been cleared and order details are stored.</small>
+              )}
             </div>
           </div>
         )}
