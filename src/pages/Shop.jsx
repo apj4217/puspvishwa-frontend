@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import API from "../api";
 import ProductCard from "../components/ProductCard";
 
 function Shop() {
@@ -747,14 +748,45 @@ const products = [
 }
 ];
 
+const [databaseProducts, setDatabaseProducts] = useState([]);
+const [loadingProducts, setLoadingProducts] = useState(true);
+const [productError, setProductError] = useState("");
+const sourceProducts = databaseProducts.length > 0 ? databaseProducts : products;
+
 const categories = [
   "All",
-  ...new Set(products.map((product) => product.category)),
+  ...new Set(sourceProducts.map((product) => product.category)),
 ];
 
 const [searchTerm, setSearchTerm] = useState(searchParams.get("search") || "");
 const [selectedCategory, setSelectedCategory] = useState("All");
 const [sortBy, setSortBy] = useState("featured");
+
+useEffect(() => {
+  let active = true;
+
+  API.get("/products")
+    .then((response) => {
+      if (active) {
+        setDatabaseProducts(response.data.products || []);
+        setProductError("");
+      }
+    })
+    .catch(() => {
+      if (active) {
+        setProductError("Live product database is unavailable. Showing saved collection.");
+      }
+    })
+    .finally(() => {
+      if (active) {
+        setLoadingProducts(false);
+      }
+    });
+
+  return () => {
+    active = false;
+  };
+}, []);
 
 useEffect(() => {
   setSearchTerm(searchParams.get("search") || "");
@@ -763,7 +795,7 @@ useEffect(() => {
 const filteredProducts = (() => {
   const query = searchTerm.trim().toLowerCase();
 
-  return products
+  return sourceProducts
     .filter((product) => {
       const matchesSearch =
         product.name.toLowerCase().includes(query) ||
@@ -779,7 +811,7 @@ const filteredProducts = (() => {
       if (sortBy === "price-low") return a.price - b.price;
       if (sortBy === "price-high") return b.price - a.price;
       if (sortBy === "name") return a.name.localeCompare(b.name);
-      return a.id - b.id;
+      return String(a._id || a.id).localeCompare(String(b._id || b.id));
     });
 })();
 
@@ -824,6 +856,26 @@ const filteredProducts = (() => {
         </div>
 
         <div className="pv-shop-toolbar shadow-lg mb-5">
+          {productError && (
+            <div className="pv-form-message error mb-3">
+              <i className="bi bi-exclamation-circle"></i>
+              <div>
+                <strong>Database Notice</strong>
+                <span>{productError}</span>
+              </div>
+            </div>
+          )}
+
+          {loadingProducts && (
+            <div className="pv-form-message success mb-3">
+              <i className="bi bi-arrow-repeat"></i>
+              <div>
+                <strong>Loading Products</strong>
+                <span>Fetching latest products from database.</span>
+              </div>
+            </div>
+          )}
+
           <div className="row g-3 align-items-center">
             <div className="col-lg-5">
               <label className="form-label fw-semibold">
@@ -892,7 +944,7 @@ const filteredProducts = (() => {
   {filteredProducts.map((product) => (
 
     <ProductCard
-      key={product.id}
+      key={product._id || product.id}
       product={product}
     />
 

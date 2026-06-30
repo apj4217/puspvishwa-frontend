@@ -31,6 +31,11 @@ function AdminSidebar() {
           Users
         </Link>
 
+        <Link to="/admin/products" className="text-white text-decoration-none">
+          <i className="bi bi-flower1 me-2"></i>
+          Products
+        </Link>
+
         <Link to="/admin/orders" className="text-white text-decoration-none">
           <i className="bi bi-box-seam me-2"></i>
           Orders

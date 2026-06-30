@@ -14,6 +14,7 @@ import AdminLogin from "../pages/admin/AdminLogin";
 import Contacts from "../pages/admin/Contacts";
 import Dashboard from "../pages/admin/Dashboard";
 import Orders from "../pages/admin/Orders";
+import Products from "../pages/admin/Products";
 import Users from "../pages/admin/Users";
 
 function AppRoutes() {
@@ -37,6 +38,7 @@ function AppRoutes() {
       <Route element={<ProtectedRoute requiredRole="admin" />}>
         <Route path="/admin" element={<Dashboard />} />
         <Route path="/admin/users" element={<Users />} />
+        <Route path="/admin/products" element={<Products />} />
         <Route path="/admin/orders" element={<Orders />} />
         <Route path="/admin/contacts" element={<Contacts />} />
       </Route>

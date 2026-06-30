@@ -6,21 +6,24 @@ function Dashboard() {
   const [users, setUsers] = useState([]);
   const [orders, setOrders] = useState([]);
   const [contacts, setContacts] = useState([]);
+  const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchDashboard = async () => {
       try {
-        const [usersResponse, ordersResponse, contactsResponse] =
+        const [usersResponse, ordersResponse, contactsResponse, productsResponse] =
           await Promise.all([
             API.get("/auth/users"),
             API.get("/orders"),
             API.get("/contact"),
+            API.get("/products/admin/all"),
           ]);
 
         setUsers(usersResponse.data.users || []);
         setOrders(ordersResponse.data.orders || []);
         setContacts(contactsResponse.data.contacts || []);
+        setProducts(productsResponse.data.products || []);
       } catch (error) {
         console.log(error);
       } finally {
@@ -82,9 +85,9 @@ function Dashboard() {
 
           <div className="col-xl-3 col-md-6">
             <div className="pv-stat-card">
-              <i className="bi bi-envelope-paper"></i>
-              <span>Contact Requests</span>
-              <strong>{loading ? "..." : contacts.length}</strong>
+              <i className="bi bi-flower1"></i>
+              <span>Products</span>
+              <strong>{loading ? "..." : products.length}</strong>
             </div>
           </div>
 
@@ -122,7 +125,7 @@ function Dashboard() {
                   <tbody>
                     {recentOrders.map((order) => (
                       <tr key={order._id}>
-                        <td>{order.userId}</td>
+                        <td>{order.userId?.name || order.userId?.email || order.userId}</td>
                         <td>₹ {order.totalPrice}</td>
                         <td>
                           <span className="pv-status-pill">

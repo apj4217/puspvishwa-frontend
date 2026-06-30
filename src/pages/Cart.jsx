@@ -4,6 +4,12 @@ import API from "../api";
 
 const paymentModes = [
   {
+    id: "RAZORPAY",
+    title: "Online Payment",
+    note: "Real gateway: UPI, cards, wallets, net banking",
+    icon: "bi-shield-check",
+  },
+  {
     id: "COD",
     title: "Cash on Delivery",
     note: "Pay after final confirmation",
@@ -28,6 +34,20 @@ const paymentModes = [
     icon: "bi-bank",
   },
 ];
+
+const loadRazorpayScript = () =>
+  new Promise((resolve) => {
+    if (window.Razorpay) {
+      resolve(true);
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.src = "https://checkout.razorpay.com/v1/checkout.js";
+    script.onload = () => resolve(true);
+    script.onerror = () => resolve(false);
+    document.body.appendChild(script);
+  });
 
 const upiApps = [
   "Google Pay",
@@ -55,7 +75,7 @@ function Cart() {
     clearCart,
   } = useContext(CardContext);
 
-  const [paymentMethod, setPaymentMethod] = useState("COD");
+  const [paymentMethod, setPaymentMethod] = useState("RAZORPAY");
   const [shippingAddress, setShippingAddress] = useState("Satara Maharashtra");
   const [placingOrder, setPlacingOrder] = useState(false);
   const [upiApp, setUpiApp] = useState("Google Pay");
@@ -104,6 +124,7 @@ function Cart() {
   };
 
   const getPaymentLabel = () => {
+    if (paymentMethod === "RAZORPAY") return "Razorpay Online";
     if (paymentMethod === "UPI") return `UPI - ${upiApp}`;
     if (paymentMethod === "NET_BANKING") return `Net Banking - ${selectedBank}`;
     return paymentMethod;
@@ -135,16 +156,73 @@ function Cart() {
 
       setPlacingOrder(true);
 
+      let paymentId = "";
+      let paymentStatus = paymentMethod === "COD" ? "Pending" : "Selected";
+
+      if (paymentMethod === "RAZORPAY") {
+        const scriptLoaded = await loadRazorpayScript();
+
+        if (!scriptLoaded) {
+          showNotice(
+            "error",
+            "Payment Not Loaded",
+            "Unable to load payment gateway. Please try again."
+          );
+          return;
+        }
+
+        const paymentOrderResponse = await API.post("/payments/razorpay/order", {
+          amount: totalPrice,
+        });
+
+        const { keyId, order } = paymentOrderResponse.data;
+        const userEmail = user.email || "";
+        const userName = user.name || "Customer";
+
+        const paymentResult = await new Promise((resolve, reject) => {
+          const checkout = new window.Razorpay({
+            key: keyId || import.meta.env.VITE_RAZORPAY_KEY_ID,
+            amount: order.amount,
+            currency: order.currency,
+            name: "Apj's Florals",
+            description: "Premium floral and event order",
+            order_id: order.id,
+            prefill: {
+              name: userName,
+              email: userEmail,
+            },
+            theme: {
+              color: "#17130f",
+            },
+            handler: resolve,
+          });
+
+          checkout.on("payment.failed", (response) => {
+            reject(new Error(response.error?.description || "Payment failed"));
+          });
+
+          checkout.open();
+        });
+
+        await API.post("/payments/razorpay/verify", paymentResult);
+        paymentId = paymentResult.razorpay_payment_id;
+        paymentStatus = "Paid";
+      }
+
       const response = await API.post("/orders", {
         userId: user._id,
         products: cartItems.map((item) => ({
           productId: String(item._id || item.id),
+          name: item.name,
+          price: item.price,
+          image: item.image,
           quantity: item.quantity,
         })),
         totalPrice,
         shippingAddress,
         paymentMethod: getPaymentLabel(),
-        paymentStatus: paymentMethod === "COD" ? "Pending" : "Selected",
+        paymentStatus,
+        paymentId,
       });
 
       showNotice(

@@ -22,17 +22,26 @@ function CartProvider({ children }) {
 
   const addToCart = (product) => {
     setCartItems((items) => {
-      const alreadyExists = items.find((item) => item.id === product.id);
+      const productId = String(product._id || product.id);
+      const alreadyExists = items.find((item) => String(item.id) === productId);
 
       if (alreadyExists) {
         return items.map((item) =>
-          item.id === product.id
+          String(item.id) === productId
             ? { ...item, quantity: item.quantity + 1 }
             : item
         );
       }
 
-      return [...items, { ...product, quantity: 1 }];
+      return [
+        ...items,
+        {
+          ...product,
+          id: productId,
+          _id: product._id || productId,
+          quantity: 1,
+        },
+      ];
     });
   };
 

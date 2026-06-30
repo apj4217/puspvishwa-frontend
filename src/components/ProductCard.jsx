@@ -4,6 +4,9 @@ import { CardContext } from "./CardContext";
 function ProductCard({ product }) {
   const { addToCart } = useContext(CardContext);
   const [added, setAdded] = useState(false);
+  const whatsappMessage = encodeURIComponent(
+    `Hello Apj's Florals, I want to enquire about ${product.name}.`
+  );
 
   const addProduct = () => {
     addToCart(product);
@@ -35,12 +38,24 @@ function ProductCard({ product }) {
             ₹ {product.price}
           </h4>
 
-          <button
-            onClick={addProduct}
-            className="btn btn-dark px-4 py-2"
-          >
-            Add To Cart
-          </button>
+          <div className="d-flex justify-content-center gap-2 flex-wrap">
+            <button
+              onClick={addProduct}
+              className="btn btn-dark px-4 py-2"
+            >
+              Add To Cart
+            </button>
+
+            <a
+              href={`https://wa.me/918830764801?text=${whatsappMessage}`}
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-outline-dark px-3 py-2"
+              aria-label={`Enquire about ${product.name} on WhatsApp`}
+            >
+              <i className="bi bi-whatsapp"></i>
+            </a>
+          </div>
 
           {added && (
             <div className="pv-mini-message success mt-3">
