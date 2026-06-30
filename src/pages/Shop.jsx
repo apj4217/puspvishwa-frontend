@@ -855,6 +855,14 @@ const filteredProducts = (() => {
 
         </div>
 
+        <div className="pv-shop-price-note mb-4">
+          <i className="bi bi-info-circle"></i>
+          <span>
+            Product rates may change according to season, flower availability,
+            and current market prices.
+          </span>
+        </div>
+
         <div className="pv-shop-toolbar shadow-lg mb-5">
           {productError && (
             <div className="pv-form-message error mb-3">

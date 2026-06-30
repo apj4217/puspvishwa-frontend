@@ -387,6 +387,28 @@ h3,
   background: rgba(255, 250, 240, 0.86);
 }
 
+.pv-shop-price-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  border: 1px solid rgba(199, 164, 91, 0.35);
+  border-radius: 18px;
+  padding: 0.95rem 1.1rem;
+  color: rgba(23, 19, 15, 0.78);
+  background:
+    linear-gradient(135deg, rgba(255, 250, 240, 0.94), rgba(255, 255, 255, 0.88)),
+    radial-gradient(circle at top right, rgba(199, 164, 91, 0.16), transparent 14rem);
+  box-shadow: 0 16px 42px rgba(23, 19, 15, 0.08);
+  font-weight: 800;
+  text-align: center;
+}
+
+.pv-shop-price-note i {
+  color: var(--pv-burgundy);
+  font-size: 1.2rem;
+}
+
 .pv-result-count {
   display: grid;
   min-height: 58px;
