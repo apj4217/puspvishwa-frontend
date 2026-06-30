@@ -46,6 +46,11 @@ function AdminSidebar() {
           Contact Requests
         </Link>
 
+        <Link to="/admin/subscribers" className="text-white text-decoration-none">
+          <i className="bi bi-broadcast me-2"></i>
+          Subscribers
+        </Link>
+
         <button
           type="button"
           className="text-white text-start border-0 bg-transparent p-0"

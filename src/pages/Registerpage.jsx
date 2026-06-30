@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 function Registerpage() {
   const navigate = useNavigate();
+  const authBaseUrl = `${API.defaults.baseURL}/auth`;
 
   const [formvalues, setForm] = useState({
     name: "",
@@ -442,32 +443,38 @@ function Registerpage() {
 
                 <div className="d-flex gap-2">
 
-                  <button
+                  <a
+                    href={`${authBaseUrl}/google`}
                     className="btn btn-outline-dark w-100 py-2"
                     style={{
                       borderRadius: "14px",
                     }}
+                    aria-label="Sign up with Google"
                   >
                     <i className="bi bi-google"></i>
-                  </button>
+                  </a>
 
-                  <button
+                  <a
+                    href={`${authBaseUrl}/facebook`}
                     className="btn btn-outline-dark w-100 py-2"
                     style={{
                       borderRadius: "14px",
                     }}
+                    aria-label="Sign up with Facebook"
                   >
                     <i className="bi bi-facebook"></i>
-                  </button>
+                  </a>
 
-                  <button
+                  <a
+                    href={`${authBaseUrl}/instagram`}
                     className="btn btn-outline-dark w-100 py-2"
                     style={{
                       borderRadius: "14px",
                     }}
+                    aria-label="Continue with Instagram"
                   >
                     <i className="bi bi-instagram"></i>
-                  </button>
+                  </a>
 
                 </div>
 

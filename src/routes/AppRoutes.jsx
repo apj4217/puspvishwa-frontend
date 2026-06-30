@@ -15,6 +15,7 @@ import Contacts from "../pages/admin/Contacts";
 import Dashboard from "../pages/admin/Dashboard";
 import Orders from "../pages/admin/Orders";
 import Products from "../pages/admin/Products";
+import Subscribers from "../pages/admin/Subscribers";
 import Users from "../pages/admin/Users";
 
 function AppRoutes() {
@@ -41,6 +42,7 @@ function AppRoutes() {
         <Route path="/admin/products" element={<Products />} />
         <Route path="/admin/orders" element={<Orders />} />
         <Route path="/admin/contacts" element={<Contacts />} />
+        <Route path="/admin/subscribers" element={<Subscribers />} />
       </Route>
 
       <Route path="*" element={<NavigateFallback />} />

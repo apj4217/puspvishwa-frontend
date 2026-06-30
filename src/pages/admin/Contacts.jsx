@@ -29,6 +29,24 @@ function Contacts() {
     return `https://wa.me/91${phone}?text=${message}`;
   };
 
+  const deleteContact = async (id) => {
+    try {
+      const response = await API.delete(`/contact/${id}`);
+      setContacts((current) => current.filter((contact) => contact._id !== id));
+      setNotice({
+        type: "success",
+        title: "Enquiry Deleted",
+        text: response.data.message || "Enquiry removed successfully.",
+      });
+    } catch (error) {
+      setNotice({
+        type: "error",
+        title: "Delete Failed",
+        text: error.response?.data?.message || "Unable to delete enquiry.",
+      });
+    }
+  };
+
   return (
     <div className="pv-admin-layout">
       <AdminSidebar />
@@ -80,15 +98,23 @@ function Contacts() {
                     <td>{contact.eventType}</td>
                     <td style={{ minWidth: "260px" }}>{contact.message}</td>
                     <td>
-                      <a
-                        href={whatsappLink(contact)}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="btn btn-sm btn-success"
-                      >
-                        <i className="bi bi-whatsapp me-1"></i>
-                        Reply
-                      </a>
+                      <div className="d-flex flex-wrap gap-2">
+                        <a
+                          href={whatsappLink(contact)}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="btn btn-sm btn-success"
+                        >
+                          <i className="bi bi-whatsapp me-1"></i>
+                          Reply
+                        </a>
+                        <button
+                          className="btn btn-sm btn-outline-danger"
+                          onClick={() => deleteContact(contact._id)}
+                        >
+                          Delete
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}

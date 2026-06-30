@@ -7,23 +7,32 @@ function Dashboard() {
   const [orders, setOrders] = useState([]);
   const [contacts, setContacts] = useState([]);
   const [products, setProducts] = useState([]);
+  const [subscribers, setSubscribers] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchDashboard = async () => {
       try {
-        const [usersResponse, ordersResponse, contactsResponse, productsResponse] =
+        const [
+          usersResponse,
+          ordersResponse,
+          contactsResponse,
+          productsResponse,
+          subscribersResponse,
+        ] =
           await Promise.all([
             API.get("/auth/users"),
             API.get("/orders"),
             API.get("/contact"),
             API.get("/products/admin/all"),
+            API.get("/subscribers"),
           ]);
 
         setUsers(usersResponse.data.users || []);
         setOrders(ordersResponse.data.orders || []);
         setContacts(contactsResponse.data.contacts || []);
         setProducts(productsResponse.data.products || []);
+        setSubscribers(subscribersResponse.data.subscribers || []);
       } catch (error) {
         console.log(error);
       } finally {
@@ -101,6 +110,14 @@ function Dashboard() {
         </div>
 
         <div className="row g-4 mt-2">
+          <div className="col-xl-3 col-md-6">
+            <div className="pv-stat-card">
+              <i className="bi bi-broadcast"></i>
+              <span>Subscribers</span>
+              <strong>{loading ? "..." : subscribers.length}</strong>
+            </div>
+          </div>
+
           <div className="col-xl-7">
             <section className="pv-admin-panel">
               <div className="d-flex justify-content-between align-items-center mb-3">

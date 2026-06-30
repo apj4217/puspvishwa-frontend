@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import API from "../api";
 import BrandLogo from "./BrandLogo";
 
 function Footer() {
@@ -13,7 +14,7 @@ function Footer() {
   const locationUrl =
     "https://www.google.com/maps/search/?api=1&query=Satara%2C%20Maharashtra%2C%20India";
 
-  const subscribe = (event) => {
+  const subscribe = async (event) => {
     event.preventDefault();
 
     const trimmedEmail = email.trim().toLowerCase();
@@ -24,25 +25,17 @@ function Footer() {
       return;
     }
 
-    let savedEmails = [];
-
     try {
-      savedEmails = JSON.parse(
-        localStorage.getItem("apjs_florals_subscribers") || "[]"
-      );
-    } catch {
-      savedEmails = [];
-    }
+      const response = await API.post("/subscribers", {
+        email: trimmedEmail,
+        source: "footer",
+      });
 
-    if (!savedEmails.includes(trimmedEmail)) {
-      localStorage.setItem(
-        "apjs_florals_subscribers",
-        JSON.stringify([...savedEmails, trimmedEmail])
-      );
+      setEmail("");
+      setMessage(response.data.message || "You are connected with Apj's Florals updates.");
+    } catch (error) {
+      setMessage(error.response?.data?.message || "Unable to save subscription right now.");
     }
-
-    setEmail("");
-    setMessage("Thank you for joining Apj's Florals updates.");
   };
 
   return (
