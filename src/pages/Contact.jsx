@@ -4,6 +4,13 @@ import API from "../api";
 import { useState } from "react";
 
 function Contact() {
+  const businessEmail = "phuspvishwa@gmail.com";
+  const businessPhone = "918830764801";
+  const whatsappText = encodeURIComponent(
+    "Hello Apj's Florals, I want to enquire about floral decoration and event management."
+  );
+  const locationUrl =
+    "https://www.google.com/maps/search/?api=1&query=Satara%2C%20Maharashtra%2C%20India";
 
   const [formData, setFormData] =
     useState({
@@ -16,6 +23,7 @@ function Contact() {
       message: "",
 
     });
+  const [formStatus, setFormStatus] = useState(null);
 
   const changeHandler = (e) => {
 
@@ -35,6 +43,8 @@ function Contact() {
 
       e.preventDefault();
 
+      setFormStatus(null);
+
       try {
 
         const response =
@@ -43,15 +53,31 @@ function Contact() {
             formData
           );
 
-        alert(
-          response.data.message
-        );
+        setFormStatus({
+          type: "success",
+          title: "Message Received",
+          text:
+            response.data.message ||
+            "Thank you. Our team will contact you shortly.",
+        });
 
-      } catch {
+        setFormData({
+          name: "",
+          phone: "",
+          email: "",
+          eventType: "Wedding Decoration",
+          message: "",
+        });
 
-        alert(
-          "Failed To Send"
-        );
+      } catch (error) {
+
+        setFormStatus({
+          type: "error",
+          title: "Message Not Sent",
+          text:
+            error.response?.data?.message ||
+            "Please check your details and try again.",
+        });
 
       }
 
@@ -219,8 +245,15 @@ function Contact() {
                         Location
                       </h5>
 
-                      <p className="m-0 opacity-75">
-                        Satara, Maharashtra, India
+                      <p className="m-0">
+                        <a
+                          href={locationUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-white text-decoration-none opacity-75"
+                        >
+                          Satara, Maharashtra, India
+                        </a>
                       </p>
 
                     </div>
@@ -246,8 +279,13 @@ function Contact() {
                         Phone
                       </h5>
 
-                      <p className="m-0 opacity-75">
-                        +91 8830764801
+                      <p className="m-0">
+                        <a
+                          href={`tel:+${businessPhone}`}
+                          className="text-white text-decoration-none opacity-75"
+                        >
+                          +91 8830764801
+                        </a>
                       </p>
 
                     </div>
@@ -273,8 +311,13 @@ function Contact() {
                         Email
                       </h5>
 
-                      <p className="m-0 opacity-75">
-                        phuspvishwa@gmail.com
+                      <p className="m-0">
+                        <a
+                          href={`mailto:${businessEmail}`}
+                          className="text-white text-decoration-none opacity-75"
+                        >
+                          {businessEmail}
+                        </a>
                       </p>
 
                     </div>
@@ -287,45 +330,44 @@ function Contact() {
 
                 <div className="d-flex gap-3 mt-5">
 
-                  {/* INSTAGRAM */}
+                  {/* EMAIL */}
 
                   <a
-                    href="https://instagram.com/yourusername"
-                    target="_blank"
-                    rel="noreferrer"
+                    href={`mailto:${businessEmail}?subject=Event%20Decoration%20Enquiry`}
                     className="btn btn-light rounded-circle d-flex align-items-center justify-content-center"
+                    aria-label="Email Apj's Florals"
                     style={{
                       width: "60px",
                       height: "60px",
                       fontSize: "1.4rem",
                     }}
                   >
-                    <i className="bi bi-instagram"></i>
+                    <i className="bi bi-envelope"></i>
                   </a>
 
-                  {/* FACEBOOK */}
+                  {/* CALL */}
 
                   <a
-                    href="https://facebook.com/yourusername"
-                    target="_blank"
-                    rel="noreferrer"
+                    href={`tel:+${businessPhone}`}
                     className="btn btn-light rounded-circle d-flex align-items-center justify-content-center"
+                    aria-label="Call Apj's Florals"
                     style={{
                       width: "60px",
                       height: "60px",
                       fontSize: "1.4rem",
                     }}
                   >
-                    <i className="bi bi-facebook"></i>
+                    <i className="bi bi-telephone"></i>
                   </a>
 
                   {/* WHATSAPP */}
 
                   <a
-                    href="https://wa.me/918830764801"
+                    href={`https://wa.me/${businessPhone}?text=${whatsappText}`}
                     target="_blank"
                     rel="noreferrer"
                     className="btn btn-light rounded-circle d-flex align-items-center justify-content-center"
+                    aria-label="WhatsApp Apj's Florals"
                     style={{
                       width: "60px",
                       height: "60px",
@@ -365,6 +407,21 @@ function Contact() {
                 </h1>
 
                 <form onSubmit={submitHandler}>
+                  {formStatus && (
+                    <div className={`pv-form-message ${formStatus.type} mb-4`}>
+                      <i
+                        className={`bi ${
+                          formStatus.type === "success"
+                            ? "bi-check-circle"
+                            : "bi-exclamation-circle"
+                        }`}
+                      ></i>
+                      <div>
+                        <strong>{formStatus.title}</strong>
+                        <span>{formStatus.text}</span>
+                      </div>
+                    </div>
+                  )}
 
                   <div className="row">
 

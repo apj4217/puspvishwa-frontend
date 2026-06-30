@@ -1,12 +1,14 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CardContext } from "./CardContext";
 
 function ProductCard({ product }) {
   const { addToCart } = useContext(CardContext);
+  const [added, setAdded] = useState(false);
 
   const addProduct = () => {
     addToCart(product);
-    alert("Added To Cart");
+    setAdded(true);
+    window.setTimeout(() => setAdded(false), 1800);
   };
 
   return (
@@ -39,6 +41,13 @@ function ProductCard({ product }) {
           >
             Add To Cart
           </button>
+
+          {added && (
+            <div className="pv-mini-message success mt-3">
+              <i className="bi bi-check-circle"></i>
+              Added to cart
+            </div>
+          )}
         </div>
       </div>
     </div>

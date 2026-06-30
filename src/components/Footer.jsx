@@ -5,6 +5,13 @@ import BrandLogo from "./BrandLogo";
 function Footer() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const businessEmail = "phuspvishwa@gmail.com";
+  const businessPhone = "918830764801";
+  const whatsappText = encodeURIComponent(
+    "Hello Apj's Florals, I want to enquire about floral decoration and event management."
+  );
+  const locationUrl =
+    "https://www.google.com/maps/search/?api=1&query=Satara%2C%20Maharashtra%2C%20India";
 
   const subscribe = (event) => {
     event.preventDefault();
@@ -17,9 +24,15 @@ function Footer() {
       return;
     }
 
-    const savedEmails = JSON.parse(
-      localStorage.getItem("apjs_florals_subscribers") || "[]"
-    );
+    let savedEmails = [];
+
+    try {
+      savedEmails = JSON.parse(
+        localStorage.getItem("apjs_florals_subscribers") || "[]"
+      );
+    } catch {
+      savedEmails = [];
+    }
 
     if (!savedEmails.includes(trimmedEmail)) {
       localStorage.setItem(
@@ -113,31 +126,30 @@ function Footer() {
 
             <div className="d-flex gap-3 mt-4">
               <a
-                href="https://instagram.com/yourusername"
-                target="_blank"
-                rel="noreferrer"
+                href={`mailto:${businessEmail}?subject=Event%20Decoration%20Enquiry`}
                 className="btn btn-outline-light rounded-circle d-flex align-items-center justify-content-center"
                 style={{ width: "55px", height: "55px", fontSize: "1.3rem" }}
+                aria-label="Email Apj's Florals"
               >
-                <i className="bi bi-instagram"></i>
+                <i className="bi bi-envelope"></i>
               </a>
 
               <a
-                href="https://facebook.com/yourusername"
-                target="_blank"
-                rel="noreferrer"
+                href={`tel:+${businessPhone}`}
                 className="btn btn-outline-light rounded-circle d-flex align-items-center justify-content-center"
                 style={{ width: "55px", height: "55px", fontSize: "1.3rem" }}
+                aria-label="Call Apj's Florals"
               >
-                <i className="bi bi-facebook"></i>
+                <i className="bi bi-telephone"></i>
               </a>
 
               <a
-                href="https://wa.me/918830764801"
+                href={`https://wa.me/${businessPhone}?text=${whatsappText}`}
                 target="_blank"
                 rel="noreferrer"
                 className="btn btn-outline-light rounded-circle d-flex align-items-center justify-content-center"
                 style={{ width: "55px", height: "55px", fontSize: "1.3rem" }}
+                aria-label="WhatsApp Apj's Florals"
               >
                 <i className="bi bi-whatsapp"></i>
               </a>
@@ -166,11 +178,11 @@ function Footer() {
             </h5>
 
             <ul className="list-unstyled d-flex flex-column gap-3">
-              <li className="opacity-75">Luxury Wedding Decoration</li>
-              <li className="opacity-75">Premium Bouquets</li>
-              <li className="opacity-75">Floral Stage Setup</li>
-              <li className="opacity-75">Event Styling</li>
-              <li className="opacity-75">Car Decoration</li>
+              <li><Link to="/services" className="text-decoration-none text-light opacity-75">Luxury Wedding Decoration</Link></li>
+              <li><Link to="/shop" className="text-decoration-none text-light opacity-75">Premium Bouquets</Link></li>
+              <li><Link to="/services" className="text-decoration-none text-light opacity-75">Floral Stage Setup</Link></li>
+              <li><Link to="/services" className="text-decoration-none text-light opacity-75">Event Styling</Link></li>
+              <li><Link to="/services" className="text-decoration-none text-light opacity-75">Car Decoration</Link></li>
             </ul>
           </div>
 
@@ -182,17 +194,40 @@ function Footer() {
             <div className="d-flex flex-column gap-4">
               <div>
                 <small className="opacity-50">LOCATION</small>
-                <p className="m-0 opacity-75">Satara, Maharashtra, India</p>
+                <p className="m-0">
+                  <a
+                    href={locationUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-decoration-none text-light opacity-75"
+                  >
+                    Satara, Maharashtra, India
+                  </a>
+                </p>
               </div>
 
               <div>
                 <small className="opacity-50">PHONE</small>
-                <p className="m-0 opacity-75">+91 8830764801</p>
+                <p className="m-0">
+                  <a
+                    href={`tel:+${businessPhone}`}
+                    className="text-decoration-none text-light opacity-75"
+                  >
+                    +91 8830764801
+                  </a>
+                </p>
               </div>
 
               <div>
                 <small className="opacity-50">EMAIL</small>
-                <p className="m-0 opacity-75">phuspvishwa@gmail.com</p>
+                <p className="m-0">
+                  <a
+                    href={`mailto:${businessEmail}`}
+                    className="text-decoration-none text-light opacity-75"
+                  >
+                    {businessEmail}
+                  </a>
+                </p>
               </div>
             </div>
           </div>

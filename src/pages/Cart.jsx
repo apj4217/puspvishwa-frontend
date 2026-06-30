@@ -67,6 +67,11 @@ function Cart() {
     expiry: "",
     cvv: "",
   });
+  const [notice, setNotice] = useState(null);
+
+  const showNotice = (type, title, text) => {
+    setNotice({ type, title, text });
+  };
 
   const totalItems = cartItems.reduce(
     (total, item) => total + item.quantity,
@@ -76,7 +81,7 @@ function Cart() {
   const validatePayment = () => {
     if (paymentMethod === "UPI") {
       if (!/^[\w.-]+@[\w.-]+$/.test(upiId.trim())) {
-        alert("Please enter a valid UPI ID");
+        showNotice("error", "UPI Details Needed", "Please enter a valid UPI ID.");
         return false;
       }
     }
@@ -90,7 +95,7 @@ function Cart() {
         /^\d{3,4}$/.test(cardDetails.cvv);
 
       if (!isValidCard) {
-        alert("Please enter valid card details");
+        showNotice("error", "Card Details Needed", "Please enter valid card details.");
         return false;
       }
     }
@@ -106,20 +111,21 @@ function Cart() {
 
   const placeOrder = async () => {
     try {
+      setNotice(null);
       const user = JSON.parse(localStorage.getItem("user"));
 
       if (!user?._id) {
-        alert("Please Login First");
+        showNotice("error", "Login Required", "Please login before placing your order.");
         return;
       }
 
       if (cartItems.length === 0) {
-        alert("Your cart is empty");
+        showNotice("error", "Cart Is Empty", "Add products to your cart before checkout.");
         return;
       }
 
       if (!shippingAddress.trim()) {
-        alert("Please enter delivery address");
+        showNotice("error", "Delivery Address Needed", "Please enter your delivery address.");
         return;
       }
 
@@ -141,11 +147,19 @@ function Cart() {
         paymentStatus: paymentMethod === "COD" ? "Pending" : "Selected",
       });
 
-      alert(response.data.message || "Order Placed Successfully");
+      showNotice(
+        "success",
+        "Order Placed",
+        response.data.message || "Your order has been placed successfully."
+      );
       clearCart();
     } catch (error) {
       console.log(error);
-      alert(error.response?.data?.message || "Order Failed");
+      showNotice(
+        "error",
+        "Order Failed",
+        error.response?.data?.message || "Unable to place your order right now."
+      );
     } finally {
       setPlacingOrder(false);
     }
@@ -165,6 +179,22 @@ function Cart() {
             Review your selections and choose a realistic payment mode.
           </p>
         </div>
+
+        {notice && (
+          <div className={`pv-form-message ${notice.type} mb-4`}>
+            <i
+              className={`bi ${
+                notice.type === "success"
+                  ? "bi-check-circle"
+                  : "bi-exclamation-circle"
+              }`}
+            ></i>
+            <div>
+              <strong>{notice.title}</strong>
+              <span>{notice.text}</span>
+            </div>
+          </div>
+        )}
 
         {cartItems.length === 0 ? (
           <div className="text-center pv-empty-state shadow-lg">
