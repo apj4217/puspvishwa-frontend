@@ -227,15 +227,16 @@ function Cart() {
 
       showNotice(
         "success",
-        "Order Placed",
-        response.data.message || "Your order has been placed successfully."
+        "Order Confirmed",
+        response.data.message ||
+          "Your floral order has been received. Our team will start processing it shortly."
       );
       clearCart();
     } catch (error) {
       console.log(error);
       showNotice(
         "error",
-        "Order Failed",
+        "Order Could Not Be Placed",
         error.response?.data?.message || "Unable to place your order right now."
       );
     } finally {

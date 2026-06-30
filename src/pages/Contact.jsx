@@ -55,10 +55,10 @@ function Contact() {
 
         setFormStatus({
           type: "success",
-          title: "Message Received",
+          title: "Enquiry Received",
           text:
             response.data.message ||
-            "Thank you. Our team will contact you shortly.",
+            "Thank you for sharing your event details. Our team will contact you shortly.",
         });
 
         setFormData({
@@ -73,7 +73,7 @@ function Contact() {
 
         setFormStatus({
           type: "error",
-          title: "Message Not Sent",
+          title: "Could Not Send Enquiry",
           text:
             error.response?.data?.message ||
             "Please check your details and try again.",

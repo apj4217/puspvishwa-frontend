@@ -58,9 +58,12 @@ function ProductCard({ product }) {
           </div>
 
           {added && (
-            <div className="pv-mini-message success mt-3">
+            <div className="pv-toast-card success mt-3" role="status">
               <i className="bi bi-check-circle"></i>
-              Added to cart
+              <div>
+                <strong>Added To Cart</strong>
+                <span>{product.name} is ready for checkout.</span>
+              </div>
             </div>
           )}
         </div>
