@@ -1,50 +1,13 @@
 
-import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import API from "../api";
 
 function Loginpage() {
   const navigate = useNavigate();
   const location = useLocation();
-  const [searchParams] = useSearchParams();
-  const authBaseUrl = `${API.defaults.baseURL}/auth`;
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    const socialError = searchParams.get("socialError");
-    const socialCode = searchParams.get("socialCode");
-
-    if (socialError) {
-      setErrorMessage(socialError);
-      return;
-    }
-
-    if (!socialCode) {
-      return;
-    }
-
-    const completeSocialLogin = async () => {
-      try {
-        setLoading(true);
-        const response = await API.post("/auth/social/exchange", {
-          code: socialCode,
-        });
-
-        localStorage.setItem("token", response.data.token);
-        localStorage.setItem("user", JSON.stringify(response.data.user));
-        navigate(response.data.user.role === "admin" ? "/admin" : "/shop", {
-          replace: true,
-        });
-      } catch (error) {
-        setErrorMessage(error.response?.data?.message || "Unable to complete social login.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    completeSocialLogin();
-  }, [navigate, searchParams]);
 
   const submitHandler = async (e) => {
 
@@ -415,8 +378,8 @@ function Loginpage() {
 
                 <div className="d-flex gap-3">
 
-                  <a
-                    href={`${authBaseUrl}/google`}
+                  <button
+                    type="button"
                     className="btn btn-outline-dark w-100 py-2"
                     style={{
                       borderRadius: "15px",
@@ -424,10 +387,10 @@ function Loginpage() {
                     aria-label="Continue with Google"
                   >
                     <i className="bi bi-google fs-5"></i>
-                  </a>
+                  </button>
 
-                  <a
-                    href={`${authBaseUrl}/facebook`}
+                  <button
+                    type="button"
                     className="btn btn-outline-dark w-100 py-2"
                     style={{
                       borderRadius: "15px",
@@ -435,10 +398,10 @@ function Loginpage() {
                     aria-label="Continue with Facebook"
                   >
                     <i className="bi bi-facebook fs-5"></i>
-                  </a>
+                  </button>
 
-                  <a
-                    href={`${authBaseUrl}/instagram`}
+                  <button
+                    type="button"
                     className="btn btn-outline-dark w-100 py-2"
                     style={{
                       borderRadius: "15px",
@@ -446,7 +409,7 @@ function Loginpage() {
                     aria-label="Continue with Instagram"
                   >
                     <i className="bi bi-instagram fs-5"></i>
-                  </a>
+                  </button>
 
                 </div>
 
