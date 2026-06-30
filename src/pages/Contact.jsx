@@ -420,25 +420,6 @@ function Contact() {
                 </h1>
 
                 <form onSubmit={submitHandler}>
-                  {formStatus && (
-                    <div className={`pv-form-message ${formStatus.type} mb-4`} role="status">
-                      <i
-                        className={`bi ${
-                          formStatus.type === "success"
-                            ? "bi-check-circle"
-                            : "bi-exclamation-circle"
-                        }`}
-                      ></i>
-                      <div>
-                        <strong>{formStatus.title}</strong>
-                        <span>{formStatus.text}</span>
-                        {formStatus.type === "success" && (
-                          <small>We have saved your enquiry successfully.</small>
-                        )}
-                      </div>
-                    </div>
-                  )}
-
                   <div className="row">
 
                     <div className="col-md-6 mb-4">
@@ -599,6 +580,27 @@ function Contact() {
                   >
                     Send Message
                   </button>
+
+                  {formStatus && (
+                    <div className={`pv-action-result ${formStatus.type} mt-3`} role="status">
+                      <div className="pv-success-orbit">
+                        <i
+                          className={`bi ${
+                            formStatus.type === "success"
+                              ? "bi-check2"
+                              : "bi-exclamation-lg"
+                          }`}
+                        ></i>
+                      </div>
+                      <div>
+                        <strong>{formStatus.title}</strong>
+                        <span>{formStatus.text}</span>
+                        {formStatus.type === "success" && (
+                          <small>We have saved your enquiry successfully.</small>
+                        )}
+                      </div>
+                    </div>
+                  )}
 
                 </form>
 

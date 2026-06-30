@@ -623,6 +623,120 @@ h3,
   background: rgba(31, 122, 77, 0.1);
 }
 
+.pv-action-result {
+  display: grid;
+  grid-template-columns: 54px 1fr;
+  gap: 1rem;
+  align-items: center;
+  border: 1px solid rgba(31, 122, 77, 0.24);
+  border-radius: 22px;
+  padding: 1rem;
+  color: #17130f;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(255, 250, 240, 0.96)),
+    radial-gradient(circle at top right, rgba(31, 122, 77, 0.13), transparent 14rem);
+  box-shadow: 0 18px 55px rgba(23, 19, 15, 0.12);
+  animation: pv-result-pop 260ms ease both;
+}
+
+.pv-action-result.error {
+  border-color: rgba(159, 36, 56, 0.24);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(255, 250, 240, 0.96)),
+    radial-gradient(circle at top right, rgba(159, 36, 56, 0.12), transparent 14rem);
+}
+
+.pv-success-orbit {
+  position: relative;
+  display: grid;
+  width: 54px;
+  height: 54px;
+  place-items: center;
+  border-radius: 18px;
+  color: #fffaf0;
+  background: linear-gradient(135deg, #1f7a4d, #0f4f45);
+  box-shadow: 0 14px 28px rgba(31, 122, 77, 0.26);
+}
+
+.pv-action-result.error .pv-success-orbit {
+  background: linear-gradient(135deg, #9f2438, #5d1723);
+  box-shadow: 0 14px 28px rgba(159, 36, 56, 0.2);
+}
+
+.pv-success-orbit::after {
+  position: absolute;
+  inset: -7px;
+  content: "";
+  border: 1px solid rgba(31, 122, 77, 0.22);
+  border-radius: 22px;
+  animation: pv-success-pulse 1.45s ease infinite;
+}
+
+.pv-action-result.error .pv-success-orbit::after {
+  border-color: rgba(159, 36, 56, 0.22);
+}
+
+.pv-success-orbit i {
+  position: relative;
+  z-index: 1;
+  font-size: 1.45rem;
+}
+
+.pv-action-result strong,
+.pv-action-result span,
+.pv-action-result small {
+  display: block;
+}
+
+.pv-action-result strong {
+  color: #17130f;
+  font-size: 1.05rem;
+  font-weight: 950;
+}
+
+.pv-action-result span {
+  color: rgba(23, 19, 15, 0.66);
+  font-weight: 700;
+}
+
+.pv-action-result small {
+  width: fit-content;
+  border-radius: 999px;
+  margin-top: 0.55rem;
+  padding: 0.34rem 0.72rem;
+  color: #1f7a4d;
+  background: rgba(31, 122, 77, 0.1);
+  font-weight: 900;
+}
+
+.pv-action-result.error small {
+  color: #9f2438;
+  background: rgba(159, 36, 56, 0.1);
+}
+
+@keyframes pv-result-pop {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes pv-success-pulse {
+  0% {
+    opacity: 0.65;
+    transform: scale(0.92);
+  }
+  70%,
+  100% {
+    opacity: 0;
+    transform: scale(1.12);
+  }
+}
+
 @keyframes pv-toast-in {
   from {
     opacity: 0;

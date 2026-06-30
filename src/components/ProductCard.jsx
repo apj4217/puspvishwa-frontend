@@ -11,7 +11,7 @@ function ProductCard({ product }) {
   const addProduct = () => {
     addToCart(product);
     setAdded(true);
-    window.setTimeout(() => setAdded(false), 1800);
+    window.setTimeout(() => setAdded(false), 3200);
   };
 
   return (
@@ -58,11 +58,13 @@ function ProductCard({ product }) {
           </div>
 
           {added && (
-            <div className="pv-toast-card success mt-3" role="status">
-              <i className="bi bi-check-circle"></i>
+            <div className="pv-action-result success mt-3" role="status">
+              <div className="pv-success-orbit">
+                <i className="bi bi-check2"></i>
+              </div>
               <div>
                 <strong>Added To Cart</strong>
-                <span>{product.name} is ready for checkout.</span>
+                <span>{product.name} has been added successfully.</span>
                 <small>Success</small>
               </div>
             </div>

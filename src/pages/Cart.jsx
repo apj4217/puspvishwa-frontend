@@ -259,25 +259,6 @@ function Cart() {
           </p>
         </div>
 
-        {notice && (
-          <div className={`pv-form-message ${notice.type} mb-4`} role="status">
-            <i
-              className={`bi ${
-                notice.type === "success"
-                  ? "bi-check-circle"
-                  : "bi-exclamation-circle"
-              }`}
-            ></i>
-            <div>
-              <strong>{notice.title}</strong>
-              <span>{notice.text}</span>
-              {notice.type === "success" && (
-                <small>Your cart has been cleared and order details are stored.</small>
-              )}
-            </div>
-          </div>
-        )}
-
         {cartItems.length === 0 ? (
           <div className="text-center pv-empty-state shadow-lg">
             <i className="bi bi-bag-x display-3 text-muted"></i>
@@ -542,6 +523,27 @@ function Cart() {
                 >
                   {placingOrder ? "Placing Order..." : "Place Order"}
                 </button>
+
+                {notice && (
+                  <div className={`pv-action-result ${notice.type} mt-3`} role="status">
+                    <div className="pv-success-orbit">
+                      <i
+                        className={`bi ${
+                          notice.type === "success"
+                            ? "bi-check2"
+                            : "bi-exclamation-lg"
+                        }`}
+                      ></i>
+                    </div>
+                    <div>
+                      <strong>{notice.title}</strong>
+                      <span>{notice.text}</span>
+                      {notice.type === "success" && (
+                        <small>Order details are stored successfully.</small>
+                      )}
+                    </div>
+                  </div>
+                )}
               </aside>
             </div>
           </div>
