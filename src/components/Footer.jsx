@@ -230,6 +230,9 @@ function Footer() {
           <p className="m-0 opacity-75">
             © 2026 Apj's Florals - Crafted With Elegance.
           </p>
+          <p className="pv-developer-watermark m-0 mt-2">
+            Design & Developed by <span>Aditya Jadhav</span>
+          </p>
         </div>
       </div>
     </footer>
