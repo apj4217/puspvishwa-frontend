@@ -8,6 +8,7 @@ function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
     return Boolean(localStorage.getItem("token") && localStorage.getItem("user"));
   });
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -44,6 +45,8 @@ function Navbar() {
     if (menu?.classList.contains("show")) {
       menu.classList.remove("show");
     }
+
+    setIsMenuOpen(false);
 
     window.scrollTo({
       top: 0,
@@ -82,8 +85,9 @@ function Navbar() {
         <button
           className="navbar-toggler border-0 shadow-none p-0"
           type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#mainNavbar"
+          aria-label="Toggle navigation"
+          aria-expanded={isMenuOpen}
+          onClick={() => setIsMenuOpen((open) => !open)}
         >
 
           <span className="navbar-toggler-icon"></span>
@@ -93,7 +97,7 @@ function Navbar() {
         {/* NAVBAR */}
 
         <div
-          className="collapse navbar-collapse"
+          className={`collapse navbar-collapse ${isMenuOpen ? "show" : ""}`}
           id="mainNavbar"
         >
 

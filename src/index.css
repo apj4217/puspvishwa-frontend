@@ -154,6 +154,8 @@ h3,
   background: rgba(23, 20, 18, 0.78) !important;
   border-bottom: 1px solid rgba(255, 250, 242, 0.14) !important;
   box-shadow: 0 14px 40px rgba(0, 0, 0, 0.2);
+  max-height: 100vh;
+  overflow-y: auto;
 }
 
 .pv-navbar .nav-link {
@@ -180,6 +182,16 @@ h3,
 
 .navbar-toggler-icon {
   filter: invert(1);
+}
+
+.navbar-toggler {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border: 1px solid rgba(255, 250, 242, 0.16) !important;
+  border-radius: 14px;
+  background: rgba(255, 250, 242, 0.1);
 }
 
 .pv-brand-logo {
@@ -445,7 +457,10 @@ h3,
 .pv-stat-card,
 .pv-admin-panel,
 .pv-cart-item,
-.pv-checkout-panel {
+.pv-checkout-panel,
+.pv-shop-toolbar,
+.pv-shop-price-note,
+.pv-section-card {
   animation: pv-soft-rise 360ms ease both;
 }
 
@@ -469,6 +484,27 @@ h3,
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes pv-menu-drop {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pv-image-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.025);
   }
 }
 
@@ -1240,10 +1276,15 @@ h3,
 }
 
 @media (max-width: 991.98px) {
+  .pv-navbar {
+    background: rgba(18, 15, 13, 0.92) !important;
+  }
+
   .pv-navbar .container {
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     gap: 0.75rem;
+    align-items: center;
   }
 
   .pv-navbar .navbar-brand {
@@ -1257,11 +1298,33 @@ h3,
   }
 
   .navbar-collapse {
+    flex: 0 0 100%;
     margin-top: 1rem;
     padding: 1rem;
     border: 1px solid rgba(255, 250, 242, 0.14);
     border-radius: 20px;
     background: rgba(23, 18, 15, 0.92);
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.24);
+    animation: pv-menu-drop 180ms ease both;
+  }
+
+  .pv-navbar .navbar-nav {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.55rem;
+    margin: 0 0 0.9rem !important;
+  }
+
+  .pv-navbar .nav-link {
+    display: block;
+    border: 1px solid rgba(255, 250, 242, 0.1);
+    border-radius: 14px;
+    padding: 0.8rem 0.9rem !important;
+    background: rgba(255, 250, 242, 0.08);
+  }
+
+  .pv-navbar .nav-link::after {
+    display: none;
   }
 
   .container-fluid.px-5 {
@@ -1276,6 +1339,16 @@ h3,
   .pv-navbar-search {
     width: 100%;
     min-width: 0;
+    min-height: 46px;
+    flex: 1 1 100%;
+    order: -1;
+  }
+
+  .pv-navbar .navbar-collapse > .d-flex {
+    display: grid !important;
+    grid-template-columns: 1fr 46px 46px;
+    width: 100%;
+    gap: 0.65rem !important;
   }
 
   .pv-brand-logo-compact {
@@ -1330,6 +1403,10 @@ h3,
 }
 
 @media (max-width: 767.98px) {
+  .pv-navbar .container {
+    width: min(100% - 0.9rem, 1320px);
+  }
+
   section {
     min-height: auto !important;
   }
@@ -1359,6 +1436,15 @@ h3,
 
   .pv-product-card img {
     height: 250px !important;
+  }
+
+  .pv-shop-toolbar,
+  .pv-shop-price-note,
+  .pv-empty-state,
+  .pv-section-card,
+  .pv-admin-order-card {
+    border-radius: 18px;
+    padding: 1rem;
   }
 
   .pv-cart-item {
@@ -1422,6 +1508,10 @@ h3,
 }
 
 @media (max-width: 420px) {
+  .pv-navbar .navbar-nav {
+    grid-template-columns: 1fr;
+  }
+
   .pv-brand-logo-compact .pv-brand-mark {
     width: 38px;
     height: 38px;
@@ -1439,7 +1529,7 @@ h3,
   }
 
   .pv-brand-logo-compact .pv-brand-name {
-    font-size: 1rem;
+    font-size: 0.95rem;
   }
 
   .pv-brand-logo-compact .pv-brand-tagline {
