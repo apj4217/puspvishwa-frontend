@@ -513,6 +513,21 @@ h3,
   background: rgba(255, 250, 242, 0.92) !important;
 }
 
+.pv-about-story-card {
+  position: relative;
+}
+
+.pv-about-story-copy {
+  position: relative;
+  z-index: 1;
+}
+
+.pv-contact-info-card,
+.pv-contact-form-card {
+  position: relative;
+  z-index: 1;
+}
+
 .pv-footer a {
   transition: color 180ms ease, opacity 180ms ease, border-color 180ms ease;
 }
@@ -1432,6 +1447,61 @@ h3,
 
   .rounded-5 {
     border-radius: 24px !important;
+  }
+
+  .pv-about-hero {
+    min-height: 88vh !important;
+    padding-top: 5.5rem;
+    padding-bottom: 3rem;
+  }
+
+  .pv-about-hero p {
+    max-width: 100% !important;
+    font-size: 1rem !important;
+    line-height: 1.75 !important;
+  }
+
+  .pv-about-premium {
+    margin-top: 1.25rem !important;
+  }
+
+  .pv-about-story-card {
+    border-radius: 24px !important;
+  }
+
+  .pv-about-story-image {
+    display: block;
+    height: 320px !important;
+    min-height: 0 !important;
+  }
+
+  .pv-about-story-copy {
+    padding-top: 1.75rem !important;
+  }
+
+  .pv-contact-hero {
+    min-height: 82vh !important;
+    padding-top: 5.5rem;
+    padding-bottom: 3rem;
+  }
+
+  .pv-contact-hero p {
+    max-width: 100% !important;
+    font-size: 1rem !important;
+    line-height: 1.75 !important;
+  }
+
+  .pv-contact-shell {
+    margin-top: 1.25rem !important;
+  }
+
+  .pv-contact-info-card,
+  .pv-contact-form-card {
+    border-radius: 24px !important;
+  }
+
+  .pv-contact-info-card .d-flex.align-items-center {
+    align-items: flex-start !important;
   }
 
   .pv-product-card img {

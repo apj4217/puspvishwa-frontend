@@ -109,7 +109,7 @@ function Contact() {
       {/* HERO SECTION */}
 
       <section
-        className="position-relative d-flex align-items-center"
+        className="position-relative d-flex align-items-center pv-contact-hero"
         style={{
           minHeight: "75vh",
         }}
@@ -192,7 +192,7 @@ function Contact() {
       {/* CONTACT SECTION */}
 
       <section
-        className="position-relative"
+        className="position-relative pv-contact-shell"
         style={{
           marginTop: "-90px",
           zIndex: "10",
@@ -208,7 +208,7 @@ function Contact() {
             <div className="col-lg-5">
 
               <div
-                className="bg-dark text-white p-5 shadow-lg h-100"
+                className="bg-dark text-white p-5 shadow-lg h-100 pv-contact-info-card"
                 style={{
                   borderRadius: "40px",
                 }}
@@ -401,7 +401,7 @@ function Contact() {
             <div className="col-lg-7">
 
               <div
-                className="bg-white shadow-lg p-5"
+                className="bg-white shadow-lg p-5 pv-contact-form-card"
                 style={{
                   borderRadius: "40px",
                 }}

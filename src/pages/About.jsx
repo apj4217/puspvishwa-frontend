@@ -16,7 +16,7 @@ function About() {
       {/* HERO SECTION */}
 
       <section
-        className="position-relative d-flex align-items-center"
+        className="position-relative d-flex align-items-center pv-about-hero"
         style={{
           minHeight: "100vh",
         }}
@@ -105,7 +105,7 @@ function About() {
       {/* PREMIUM SECTION */}
 
       <section
-        className="position-relative"
+        className="position-relative pv-about-premium"
         style={{
           marginTop: "-100px",
           zIndex: "10",
@@ -115,7 +115,7 @@ function About() {
         <div className="container">
 
           <div
-            className="bg-white shadow-lg overflow-hidden"
+            className="bg-white shadow-lg overflow-hidden pv-about-story-card"
             style={{
               borderRadius: "45px",
             }}
@@ -130,7 +130,7 @@ function About() {
                 <img
                   src="https://images.pexels.com/photos/35130817/pexels-photo-35130817.jpeg"
                   alt="Wedding"
-                  className="img-fluid w-100"
+                  className="img-fluid w-100 pv-about-story-image"
                   loading="lazy"
                   decoding="async"
                   style={{
@@ -143,7 +143,7 @@ function About() {
 
               {/* CONTENT */}
 
-              <div className="col-lg-6 p-5">
+              <div className="col-lg-6 p-5 pv-about-story-copy">
 
                 <span
                   className="badge bg-dark px-4 py-2 rounded-pill mb-4"
